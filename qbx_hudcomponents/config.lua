@@ -8,5 +8,16 @@ return {
 
         -- the small white dot in the middle of the screen when aiming with a weapon.
         recticle = true,
+
+        -- Weapons which needs the reticle to be enabled
+        sniperWeapons = {
+            [`WEAPON_SNIPERRIFLE`]     = true,
+            [`WEAPON_SNIPERRIFLE_MK2`] = true,
+            [`WEAPON_HEAVYSNIPER`]     = true,
+            [`WEAPON_HEAVYSNIPER_MK2`] = true,
+            [`WEAPON_MARKSMANRIFLE`]   = true,
+            [`WEAPON_MARKSMANRIFLE_MK2`] = true,
+            -- Add your custom weapons which needs reticle to be enabled
+        }
     }
 }
