@@ -2,7 +2,7 @@ local config = require 'qbx_hudcomponents.config'
 local disableHudComponents = config.disable.hudComponents
 local disableControls = config.disable.controls
 local displayAmmo = config.disable.displayAmmo
-local isReticleDisabled = config.disable.reticle
+local isReticleDisabled = config.disable.recticle
 local reticleAllowedWeapons = config.disable.reticleWeapons
 
 --- Set reticle size depending on the current weapon
