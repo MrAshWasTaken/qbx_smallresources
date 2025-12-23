@@ -10,7 +10,7 @@ return {
         recticle = true,
 
         -- Weapons which needs the reticle to be enabled
-        sniperWeapons = {
+        reticleWeapons = {
             [`WEAPON_SNIPERRIFLE`]     = true,
             [`WEAPON_SNIPERRIFLE_MK2`] = true,
             [`WEAPON_HEAVYSNIPER`]     = true,
