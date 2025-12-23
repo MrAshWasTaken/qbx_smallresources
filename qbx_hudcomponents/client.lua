@@ -2,11 +2,29 @@ local config = require 'qbx_hudcomponents.config'
 local disableHudComponents = config.disable.hudComponents
 local disableControls = config.disable.controls
 local displayAmmo = config.disable.displayAmmo
+local isReticleDisabled = config.disable.reticle
+local reticleAllowedWeapons = config.disable.reticleWeapons
+
+--- Set reticle size depending on the current weapon
+---@param weaponHash number? Hash of the currently equipped weapon
+local function setReticleSize(weaponHash)
+    if isReticleDisabled then return end
+
+    local isReticleAllowed = type(weaponHash) == 'number' and reticleAllowedWeapons[weaponHash] or false
+    local compSize = isReticleAllowed and 1.0 or 0.0
+    SetHudComponentSize(14, compSize, compSize)
+end
+
+lib.onCache('weapon', function(value)
+    setReticleSize(value)
+end)
 
 CreateThread(function()
     for i = 1, #disableHudComponents do
         SetHudComponentSize(disableHudComponents[i],0.0,0.0)
     end
+
+    setReticleSize(cache.weapon)
 
     while true do
         for i = 1, #disableControls do
@@ -15,23 +33,6 @@ CreateThread(function()
         Wait(0)
     end
 end)
-
-if config.disable.recticle then
-    lib.onCache('weapon', function(weapon)
-        if not weapon then return end
-
-        CreateThread(function()
-            while cache.weapon ~= weapon do Wait(1) end -- Wait for cache.weapon to update
-
-            while cache.weapon == weapon do
-                if not IsFirstPersonAimCamActive() then
-                    HideHudComponentThisFrame(14)
-                end
-                Wait(0)
-            end
-        end)
-    end)
-end
 
 local function addDisableHudComponents(hudComponents)
     local hudComponentsType = type(hudComponents)
